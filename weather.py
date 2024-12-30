@@ -1,6 +1,6 @@
 import requests
 import config
-
+import json
 
 class City:
     def __init__(self, name, lat, lon, units):
@@ -32,11 +32,4 @@ class City:
         print(f"In {self.name} it is currently {self.temp}° {units_symbol}")
         print(f"Today's High: {self.temp_max}° {units_symbol}")
         print(f"Today's Low: {self.temp_min}° {units_symbol}")
-
-my_city = City ("Kathmandu",27.700769, 85.300140, units ="imperial")
-my_city.temp_print()
-
-vacation_city = City ( "Toronto", 43.70643, -79.39864, units = "metric")
-vacation_city.temp_print()
-print(vacation_city.response_json)
 

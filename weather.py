@@ -1,5 +1,5 @@
 import requests
-
+import config
 
 
 class City:
@@ -8,20 +8,22 @@ class City:
         self.lat = lat
         self.lon = lon
         self.units = units
+        self.token = config.token
+
         self.get_data()
 
     def get_data(self):
         try:
-            response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?units={self.units}&lat={self.lat}&lon={self.lon}&appid=0fe7392817a47866d3237308dc62b69c")
-
+            response = requests.get(f"https://api.openweathermap.org/data/2.5/weather?units={self.units}&lat={self.lat}&lon={self.lon}&appid={self.token}")
+            self.response_json = response.json()
+            self.temp = self.response_json["main"]["temp"]
+            self.temp_min = self.response_json["main"]["temp_min"]
+            self.temp_max = self.response_json["main"]["temp_max"]
+        
         except:
             print("No internet access!")
 
-        self.response_json = response.json()
-        self.temp = self.response_json["main"]["temp"]
-        self.temp_min = self.response_json["main"]["temp_min"]
-        self.temp_max = self.response_json["main"]["temp_max"]
-        
+
     
     def temp_print(self):
         units_symbol = "C"
